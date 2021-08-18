@@ -1,0 +1,18 @@
+---
+- name: update server
+  hosts: SERVER_DEV
+  become: yes
+
+  tasks:
+
+  - name: update file
+    git:
+      repo: 'ssh://git@gitlab.its-dev.ru:2224/local_market/frontend.git'
+      dest: /var/app/local-market/frontend
+      update: yes
+      force: yes
+      version: "master"
+  - name: docker-compose update
+    shell: cd /var/app/local-market/frontend; docker-compose up -d --build 
+  - name: cleaninf of memory
+    shell: docker image prune -f 

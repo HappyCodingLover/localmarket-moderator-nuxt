@@ -1,0 +1,17 @@
+version: '3'
+
+services:  
+  moderator:
+    build: .
+    restart: always
+    container_name: moderator
+    networks:
+      - moderator-network
+      - nginx_proxy
+networks:
+  moderator-network:
+    driver: bridge
+  nginx_proxy:
+    external: true
+
+
